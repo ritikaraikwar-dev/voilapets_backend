@@ -24,12 +24,21 @@ app.get('/health', (req, res) => {
 dbConnect();
 
 app.use(express.json());
-app.use(cors(
-    {
-         origin: 'http://localhost:3000',
-  credentials: true,
-    }
-));
+
+
+// Allow requests from localhost:3000 (your React app)
+app.use(cors({
+  origin: 'http://localhost:3000',  // or use '*' for all origins (not recommended for production)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true // if you use cookies/auth headers
+}));
+
+// app.use(cors(
+//     {
+//          origin: 'http://localhost:3000',
+//   credentials: true,
+//     }
+// ));
 
 app.use('/voilapets',route);
 
