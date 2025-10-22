@@ -63,8 +63,10 @@ const dbConnect = require('./config/dbConnect');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
-  origin:'https://voilapets-frontend.vercel.app',
+  origin: [
+    'http://localhost:3000',
+    'https://voilapets-frontend.vercel.app'
+  ],
   credentials: true
 }));
 app.use(express.json());
