@@ -17,7 +17,7 @@ app.use(session({
 
 app.get('/health', (req, res) => {
   console.log('Current session ID:', req.sessionID);
-  res.send('server started succesfullyaaa');
+  res.send('server started succesfully');
 });
 
  
@@ -25,7 +25,10 @@ dbConnect();
 
 app.use(express.json());
 app.use(cors(
-   
+    {
+         origin: 'http://localhost:3000',
+  credentials: true,
+    }
 ));
 
 app.use('/voilapets',route);
