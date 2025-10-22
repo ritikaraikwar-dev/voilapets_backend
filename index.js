@@ -7,13 +7,13 @@ const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
  
-app.use(session({
-  secret: 'voilapets@1234',
-  resave: false,
-  saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/voilapets' }),
-  cookie: { secure: false }
-})) 
+// app.use(session({
+//   secret: 'voilapets@1234',
+//   resave: false,
+//   saveUninitialized: true,
+//   store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/voilapets' }),
+//   cookie: { secure: false }
+// })) 
 
 app.get('/health', (req, res) => {
   console.log('Current session ID:', req.sessionID);
