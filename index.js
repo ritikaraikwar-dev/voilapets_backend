@@ -62,6 +62,10 @@ const dbConnect = require('./config/dbConnect');
 require('dotenv').config();
 
 const app = express();
+
+
+ 
+
 app.use(cors({
   origin: [
     'http://localhost:3000',
@@ -69,9 +73,25 @@ app.use(cors({
   ],
   credentials: true
 }));
+
+app.use(session({
+  secret: 'voilapets@1234',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/voilapets' }),
+  cookie: { secure: false }
+}))
+
+
 app.use(express.json());
+
+
 dbConnect();
+
 app.use('/voilapets', route);
+
+ 
+
 app.get('/', (req, res) => {
   res.send("hello how are you");
 });

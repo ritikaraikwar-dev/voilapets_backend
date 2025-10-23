@@ -32,13 +32,13 @@ const Cart = require('../models/Cart');
 
 const addCart = async (req, res) => {
   try {
-    const sessionId = req.sessionID;
-console.log("session id")
+//     const sessionId = req.sessionID;
+// console.log("session id")
     const { id, title, price, image, color } = req.body;
 
-    // if (!sessionId) {
-    //   return res.status(400).json({ message: "Session ID missing" });
-    // }
+    if (!sessionId) {
+      return res.status(400).json({ message: "Session ID missing" });
+    }
 
     // Rename the variable to avoid shadowing
     const cartItem = await Cart.create({ id, title, price, image, color});
