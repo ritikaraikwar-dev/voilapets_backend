@@ -59,8 +59,18 @@ const express = require('express');
 const cors = require('cors');
 const route = require('./routes/route');
 const dbConnect = require('./config/dbConnect');
+require('dotenv').config();
 
 const app = express();
+
+
+app.use(session({
+  secret: 'voilapets@1234',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: process.env.REACT_APP_BASE_URL}),
+  cookie: { secure: false }
+}))
 
 app.use(cors({
   origin: [

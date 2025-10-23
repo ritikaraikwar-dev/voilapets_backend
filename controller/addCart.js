@@ -33,7 +33,7 @@ const Cart = require('../models/Cart');
 const addCart = async (req, res) => {
   try {
     const sessionId = req.sessionID;
-
+console.log("session id")
     const { id, title, price, image, color } = req.body;
 
     if (!sessionId) {
