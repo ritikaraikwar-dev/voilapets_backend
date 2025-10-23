@@ -54,7 +54,7 @@
 //     res.send("hello how are you");
 // });
 
-
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const route = require('./routes/route');
@@ -74,6 +74,14 @@ app.use(express.json());
 dbConnect();
 
 app.use('/voilapets', route);
+
+app.use(session({
+  secret: 'voilapets@1234',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl:process.env.MONGO_URI}),
+  cookie: { secure: false }
+}))
 
 app.get('/', (req, res) => {
   res.send("hello how are you");

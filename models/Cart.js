@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 
 // schema for cart
-
 const cartSchema = new mongoose.Schema(
-    { 
-           userId: {
-    type: mongoose.Schema.Types.ObjectId,  // refer to User model
-    required: true,
-    ref: 'User'
-  },
-  productId: {
-    type: String,  // or ObjectId if you have a Product model
-    required: true
-  },
+    {
+        session_id:{
+          type:String,
+          required:true
+        },
+          id:{
+            type:String,
+             
+          },
            title:{
             type:String,
              
