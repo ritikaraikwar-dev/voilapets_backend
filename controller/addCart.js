@@ -39,7 +39,8 @@ const addCart = async (req, res) => {
     if (!guestId) {
       return res.status(400).json({ message: "Guest ID missing" });
     }
-   
+   // Destructure product data from request body
+    const { id, title, price, image, color } = req.body;
     // Rename the variable to avoid shadowing
     const cartItem = await Cart.create({ id, title, price, image, color, guest_id: guestId});
 
