@@ -36,12 +36,12 @@ const addCart = async (req, res) => {
 console.log("session id")
     const { id, title, price, image, color } = req.body;
 
-    if (!sessionId) {
-      return res.status(400).json({ message: "Session ID missing" });
-    }
+    // if (!sessionId) {
+    //   return res.status(400).json({ message: "Session ID missing" });
+    // }
 
     // Rename the variable to avoid shadowing
-    const cartItem = await Cart.create({ id, title, price, image, color, session_id: sessionId });
+    const cartItem = await Cart.create({ id, title, price, image, color});
 
     res.status(201).json({
       message: "data sent successfully",
