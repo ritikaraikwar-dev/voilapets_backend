@@ -63,25 +63,19 @@ require('dotenv').config();
 
 const app = express();
 
-// app.use(cors({
-//   origin: [
-//     'http://localhost:3000',
-//     'https://voilapets-frontend.vercel.app'
-//   ],
-//   credentials: true
-// }));
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://voilapets-frontend.vercel.app'
+  ],
+  credentials: true
+}));
 
-// app.options('/*', cors());
+ 
 
 app.use(cors())
 
-app.use(session({
-  secret: 'voilapets@1234',
-  resave: false,
-  saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/voilapets' }),
-  cookie: { secure: false }
-}))
+ 
 
 
 app.use(express.json());
