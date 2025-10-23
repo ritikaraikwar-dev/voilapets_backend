@@ -62,6 +62,15 @@ const dbConnect = require('./config/dbConnect');
 
 const app = express();
 
+
+app.use(session({
+  secret: 'voilapets@1234',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl:process.env.MONGO_URI}),
+  cookie: { secure: false }
+}))
+
 app.use(cors({
   origin: [
     'http://localhost:3000',
@@ -75,13 +84,7 @@ dbConnect();
 
 app.use('/voilapets', route);
 
-app.use(session({
-  secret: 'voilapets@1234',
-  resave: false,
-  saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl:process.env.MONGO_URI}),
-  cookie: { secure: false }
-}))
+ 
 
 app.get('/', (req, res) => {
   res.send("hello how are you");
