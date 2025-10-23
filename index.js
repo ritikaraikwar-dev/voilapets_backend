@@ -72,10 +72,8 @@ app.use(session({
 }))
 
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://voilapets-frontend.vercel.app'
-  ],
+  origin: 'https://voilapets-frontend.vercel.app',  
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
 app.use(express.json());
