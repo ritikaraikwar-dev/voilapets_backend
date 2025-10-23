@@ -74,6 +74,8 @@ app.use(cors({
   credentials: true
 }));
 
+app.options('/*', cors());
+
 app.use(session({
   secret: 'voilapets@1234',
   resave: false,
