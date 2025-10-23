@@ -25,7 +25,7 @@ const sendVerificationOtp = async (req, res) => {
 
         // if user not fill any field
 
-        if (!firstName && !lastName && !email && !password) {
+        if (!firstName || !lastName || !email || !password) {
             return res.status(404).json({
                 message: "all feild are required"
             })
@@ -53,6 +53,7 @@ const sendVerificationOtp = async (req, res) => {
             error: error.message
         })
     }
+     
 }
 
 

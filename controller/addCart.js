@@ -33,7 +33,7 @@ const User = require('../models/User');
 
 const addCart = async (req, res) => {
   try {
-    const { userId, productId, title, price, image, color, sessionId } = req.body;
+    const { userId, productId, title, price, image, color } = req.body;
 
     if (!userId) {
       return res.status(400).json({ message: "userId is required" });
