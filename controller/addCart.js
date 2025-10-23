@@ -33,8 +33,7 @@ const Cart = require('../models/Cart');
 const addCart = async (req, res) => {
   try {
  
-    // Get guest_id from cookies (or sessionID if using sessions)
-    const guestId = req.cookies?.guest_id;
+    const guestId = req.body;
 
     console.log("Guest ID from cookies:", guestId);
 
