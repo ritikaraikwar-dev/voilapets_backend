@@ -44,7 +44,7 @@ const addCart = async (req, res) => {
    // Destructure product data from request body
     const { id, title, price, image, color } = req.body;
     // Rename the variable to avoid shadowing
-    const cartItem = await Cart.create({ id, title, price, image, color, guest_id: guest_id});
+    const cartItem = await Cart.create({ id, title, price, image, color, guest_id: guestId});
 
     res.status(201).json({
       message: "data sent successfully",

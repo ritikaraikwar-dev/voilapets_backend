@@ -5,12 +5,12 @@ const User = require('../models/Cart');
 const getCart = async(req , res)=>{
 
      try{
-       const guestId = req.cookies?.guest_id;
-          const product = await User.find({ guest_id: guestId }); 
+       const guestId = req.query.guest_id;  // read from query params
+    if (!guestId) return res.status(400).json({ message: 'Guest ID missing' });
 
-          // if product is not in cart
+    const products = await Cart.find({ guest_id: guestId }); // make sure you use Cart model here
           
-          if(!product){
+          if(!products){
            return res.status(300).json({
                 message:"product is not available in cart"
             })
