@@ -33,7 +33,7 @@ const Cart = require('../models/Cart');
 const addCart = async (req, res) => {
   try {
  
-    const guestId = req.body;
+    const {guestId} = req.body;
 
     console.log("Guest ID from cookies:", guestId);
 
