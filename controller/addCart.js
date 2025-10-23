@@ -32,16 +32,17 @@ const Cart = require('../models/Cart');
 
 const addCart = async (req, res) => {
   try {
-//     const sessionId = req.sessionID;
-// console.log("session id")
-    const { id, title, price, image, color } = req.body;
+ 
+    // Get guest_id from cookies (or sessionID if using sessions)
+    const guestId = req.cookies?.guest_id;
 
-    if (!sessionId) {
-      return res.status(400).json({ message: "Session ID missing" });
+    if (!guestId) {
+      return res.status(400).json({ message: "Guest ID missing" });
     }
-
+   // Destructure product data from request body
+    const { id, title, price, image, color } = req.body;
     // Rename the variable to avoid shadowing
-    const cartItem = await Cart.create({ id, title, price, image, color});
+    const cartItem = await Cart.create({ id, title, price, image, color, guest_id: guestId});
 
     res.status(201).json({
       message: "data sent successfully",
