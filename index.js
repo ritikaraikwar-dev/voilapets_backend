@@ -78,9 +78,11 @@ app.use(session({
   secret: 'voilapets@1234',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: process.env.REACT_APP_BASE_URL}),
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/voilapets' }),
   cookie: { secure: false }
 }))
+
+
 app.use(express.json());
 
 dbConnect();
