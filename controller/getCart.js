@@ -5,8 +5,8 @@ const User = require('../models/Cart');
 const getCart = async(req , res)=>{
 
      try{
-        const sessionId = req.sessionID;
-          const product = await User.find({ session_id: sessionId }); 
+       const guestId = req.cookies?.guest_id;
+          const product = await User.find({ guest_id: guestId }); 
 
           // if product is not in cart
           
