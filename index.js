@@ -63,19 +63,38 @@ const dbConnect = require('./config/dbConnect');
 const app = express();
 
 
+// app.use(session({
+//   secret: 'voilapets@1234',
+//   resave: false,
+//   saveUninitialized: true,
+//   store: MongoStore.create({ mongoUrl:process.env.MONGO_URI}),
+//   cookie: { secure: false }
+// }))
+
+// app.use(cors({
+//   origin: 'https://voilapets-frontend.vercel.app',  
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   credentials: true
+// }));
+
+
+const corsOptions = {
+  origin: 'https://voilapets-frontend.vercel.app',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));  // enable preflight for all routes
+
 app.use(session({
   secret: 'voilapets@1234',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl:process.env.MONGO_URI}),
-  cookie: { secure: false }
-}))
-
-app.use(cors({
-  origin: 'https://voilapets-frontend.vercel.app',  
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+  cookie: { secure: false },
 }));
+
 app.use(express.json());
 
 dbConnect();
