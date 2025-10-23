@@ -6,6 +6,8 @@
 // const cors = require('cors');
 // const session = require('express-session');
 // const MongoStore = require('connect-mongo');
+// const cookieParser = require('cookie-parser');
+//  const { v4: uuidv4 } = require('uuid');
 
 
 // // Allow requests from localhost:3000 (your React app)
@@ -15,13 +17,20 @@
 //   credentials: true // if you use cookies/auth headers
 // }));
  
-// // app.use(session({
-// //   secret: 'voilapets@1234',
-// //   resave: false,
-// //   saveUninitialized: true,
-// //   store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/voilapets' }),
-// //   cookie: { secure: false }
-// // })) 
+// app.use(cookieParser());
+
+// app.use((req, res, next) => {
+//   if (!req.cookies.guest_id) {
+//     const guestId = uuidv4();
+//     res.cookie("guest_id", guestId, {
+//       httpOnly: true,
+//       secure: process.env.NODE_ENV === "production",
+//       sameSite: "lax",
+//       maxAge: 1000 * 60 * 60 * 24 * 30 // 30 days
+//     });
+//   }
+//   next();
+// });
 
 // app.get('/health', (req, res) => {
 //   console.log('Current session ID:', req.sessionID);
@@ -33,15 +42,7 @@
 
 // app.use(express.json());
 
-
  
-
-// // app.use(cors(
-// //     {
-// //          origin: 'http://localhost:3000',
-// //   credentials: true,
-// //     }
-// // ));
 
 // app.use('/voilapets',route);
 
