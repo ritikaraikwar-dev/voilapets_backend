@@ -54,6 +54,10 @@
 //     res.send("hello how are you");
 // });
 
+
+
+import { v4 as uuidv4 } from "uuid";
+import cookieParser from "cookie-parser";
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -71,22 +75,24 @@ app.use(cors({
   credentials: true
 }));
 
- 
+app.use(cookieParser());
 
-app.use(cors())
-
- 
-
+app.use((req, res, next) => {
+  if (!req.cookies.guest_id) {
+    const guestId = uuidv4();
+    res.cookie("guest_id", guestId, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24 * 30 // 30 days
+    });
+  }
+  next();
+});
 
 app.use(express.json());
-
-
 dbConnect();
-
 app.use('/voilapets', route);
-
- 
-
 app.get('/', (req, res) => {
   res.send("hello how are you");
 });
