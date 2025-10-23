@@ -36,6 +36,9 @@ const addCart = async (req, res) => {
     // Get guest_id from cookies (or sessionID if using sessions)
     const guestId = req.cookies?.guest_id;
 
+    console.log("Guest ID from cookies:", guestId);
+
+
     if (!guestId) {
       return res.status(400).json({ message: "Guest ID missing" });
     }
