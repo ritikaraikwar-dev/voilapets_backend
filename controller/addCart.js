@@ -33,6 +33,8 @@ const Cart = require('../models/Cart');
 const addCart = async (req, res) => {
   try {
  
+    const productId = req.params.id;
+
     const {guest_id} = req.body;
 
     console.log("Guest ID from add cart:", guest_id);
@@ -44,10 +46,11 @@ const addCart = async (req, res) => {
    // Destructure product data from request body
     const { id, title, price, image, color } = req.body;
     // Rename the variable to avoid shadowing
-    const cartItem = await Cart.create({ id, title, price, image, color, guest_id: guest_id});
+    const cartItem = await Cart.create({ id:productId, title, price, image, color, guest_id: guest_id});
 
     res.status(201).json({
       message: "data sent successfully",
+      productId,
       userData: cartItem,
     });
   } catch (error) {

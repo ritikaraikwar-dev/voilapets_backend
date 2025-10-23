@@ -9,7 +9,7 @@ const route =  express.Router();
 
 route.post('/addCart/:id', addCart);
 
-route.get('/getCart', getCart);
+route.get('/getCart/:id', getCart);
 route.delete('/deleteCart/:id',deleteCart);
 route.post('/increment',increment);
 route.post('/sendVerificationOtp', sendVerificationOtp);
