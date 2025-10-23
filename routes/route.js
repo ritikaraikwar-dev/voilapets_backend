@@ -7,7 +7,7 @@ const {sendVerificationOtp , verifyRegistrationOtp , userLogin} = require('../co
 
 const route =  express.Router();
 
-route.post('/addCart', addCart);
+route.post('/addCart/:id', addCart);
 
 route.get('/getCart', getCart);
 route.delete('/deleteCart/:id',deleteCart);
