@@ -56,7 +56,7 @@ const app = express();
 const session = require('express-session');
 const MongoStore = require('connect-mongo');   
 
-app.options('*', cors({
+app.options('/*', cors({
   origin: 'http://localhost:3000',
   credentials: true,
  // allowedHeaders: ['Content-Type', 'Authorization'],
