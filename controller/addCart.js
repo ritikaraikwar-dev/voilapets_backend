@@ -53,7 +53,7 @@ const addCart = async (req, res) => {
       price,
       image,
       color,
-      sessionId
+      
     });
 
     res.status(201).json({
