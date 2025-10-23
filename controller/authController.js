@@ -113,6 +113,9 @@ const userLogin = async (req, res) => {
             })
         }
 
+        console.log("🔐 Plain password:", password);
+    console.log("🧱 Stored hash:", user.password);
+
         // match password using compare method
 
         const comparePass = await bcrypt.compare(password, user.password);
