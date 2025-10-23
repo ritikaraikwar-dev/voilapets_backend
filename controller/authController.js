@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const Otp = require('../models/Otp');
 const sentOtp = require('../utils/sentOtp');
+const sentOtpForForgotPass = require('../utils/sentOtpForForgotPass');
 
 
 // api for authentication
@@ -37,7 +38,7 @@ const sendVerificationOtp = async (req, res) => {
 
         // calling function for sending email
 
-        sentOtp(email, userOtp);
+       await sentOtp(email, userOtp);
 
         const otpSend = await Otp.create({ email, otp: userOtp });
 
@@ -113,9 +114,6 @@ const userLogin = async (req, res) => {
             })
         }
 
-        console.log("🔐 Plain password:", password);
-    console.log("🧱 Stored hash:", user.password);
-
         // match password using compare method
 
         const comparePass = await bcrypt.compare(password, user.password);
@@ -138,7 +136,49 @@ const userLogin = async (req, res) => {
         })
     }
 }
-module.exports = { sendVerificationOtp, verifyRegistrationOtp, userLogin };
+
+// this is for forgot password 
+
+const forgotPassword = async (req , res) => {
+    try {
+        const email = req.body;
+
+        if(!email){
+          return  res.status(300).json({
+                message:"plzz enter email"
+            })
+        }
+
+        const isExist = User.findOne({email});
+
+        if(!isExist){
+            return res.status(300).json({
+                message:"user doesn't exist"
+            })
+        }
+
+         // genrate otp
+
+        const userOtp = await crypto.randomInt(1000, 9999);
+
+        // calling function for sending email
+
+        sentOtpForForgotPass(email, userOtp);
+
+        res.status(200).json({
+            message:"email sent successfully",
+            email
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message:"internal server error",
+            error
+        })
+    }
+}
+
+module.exports = { sendVerificationOtp, verifyRegistrationOtp, userLogin , forgotPassword};
 
 
 

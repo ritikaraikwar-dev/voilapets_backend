@@ -8,12 +8,12 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const sentOtpMail = async (toEmail, otp) => {
+const sentOtpForForgotPass = async (toEmail, otp) => {
 
     const mailOptions = {
-        from: "<ritikaitgeeks@gmail.com>",
+        from: "<ritikaitgeeks@gmail.com",
         to: toEmail,
-        subject: "Email verification",
+        subject: "Email verification for forgot password",
         text: `your otp is ${otp}`
     }
     try {
@@ -28,4 +28,4 @@ const sentOtpMail = async (toEmail, otp) => {
 
 }
 
-module.exports = sentOtpMail;
+module.exports = sentOtpForForgotPass;

@@ -11,11 +11,11 @@ const otpSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    expiresAt: {
-        type: Date,
-        required: true,
-        default: () => new Date(Date.now() + 5 * 60 * 1000)
-    },
+    // expiresAt: {
+    //     type: Date,
+    //     required: true,
+    //     default: () => new Date(Date.now() + 5 * 60 * 1000)
+    // },
 
     used: {
         type: Boolean,
@@ -24,11 +24,9 @@ const otpSchema = new mongoose.Schema({
 
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        expires:60
     }
 });
-
-// **Important: TTL index**
-otpSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 module.exports = mongoose.model("Otp", otpSchema);
