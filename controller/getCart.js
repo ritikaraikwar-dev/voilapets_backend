@@ -18,7 +18,7 @@ const getCart = async(req , res)=>{
 
         return  res.status(200).json({
             message:"data get successfully",
-             
+            product:products
           })
      }
      catch(error){
