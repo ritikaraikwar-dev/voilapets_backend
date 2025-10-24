@@ -1,4 +1,4 @@
-const User = require('../models/Cart');
+const Cart = require('../models/Cart');
 
 // api for show cart 
 
@@ -8,7 +8,7 @@ const getCart = async(req , res)=>{
        const guestId = req.params.id;
     if (!guestId) return res.status(400).json({ message: 'Guest ID missing' });
 
-         const products = await User.find({ guest_id: guestId }); // make sure you use Cart model here
+         const products = await Cart.find({ guest_id: guestId }); // make sure you use Cart model here
           
           if(!products){
            return res.status(300).json({
